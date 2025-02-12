@@ -123,4 +123,12 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'shopify' => [
+        'api_key'      => env('API_KEY'),
+        'api_secret'   => env('API_SECRET'),
+        'redirect_uri' => env('REDIRECT_URI'),
+        'scope'        => env('SCOPES'),
+        'shop'         => env('SHOP'),
+    ]
+
 ];
