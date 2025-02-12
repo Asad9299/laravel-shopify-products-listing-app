@@ -18,7 +18,8 @@ class ShopifyAuthController extends Controller
 
     public function redirectToShopify(Request $request)
     {
-        return redirect($this->shopifyService->getAuthUrl($request->query('shop')));
+        $shop = $request->query('shop') ?? config('app.shopify.shop');
+        return redirect($this->shopifyService->getAuthUrl($shop));
     }
 
     public function handleCallback(Request $request)
