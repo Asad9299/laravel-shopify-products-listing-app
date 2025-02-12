@@ -33,7 +33,7 @@ class ShopifyService
         ]);
     }
 
-    public function processOAuthCallback($request)
+    public function processOAuthCallback( $request )
     {
         $shop = $request->query('shop');
         $code = $request->query('code');
@@ -51,7 +51,6 @@ class ShopifyService
 
         Session::put('shop', $shop);
         Session::put('access_token', $data['access_token']);
-        dd($data['access_token']);
-        return redirect('/');
+        return redirect('/shopify/products');
     }
 }
