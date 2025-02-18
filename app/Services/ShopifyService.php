@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
+use App\Models\Shop;
 
 class ShopifyService
 {
@@ -50,7 +51,12 @@ class ShopifyService
         }
 
         Session::put('shop', $shop);
-        Session::put('access_token', $data['access_token']);
+        // Store or update the shop in the database
+        Shop::updateOrCreate(
+            ['shopify_domain' => $shop],
+            ['access_token' => $data['access_token']]
+        );
+
         return redirect('/shopify/products');
     }
 }
