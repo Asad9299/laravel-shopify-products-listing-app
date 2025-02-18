@@ -5,14 +5,15 @@ namespace App\Repositories;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use App\Models\Shop;
-
+use Illuminate\Support\Facades\Log;
+ 
 class ShopifyRepository
 {
-    public function fetchProducts()
+    public function fetchProducts($shop)
     {
-        $shop        = Session::get('shop');
+        // $shop        = "test-2025-store.myshopify.com";
         $accessToken = Shop::getAccessToken( $shop );
-
+        
         if (!$shop || !$accessToken) {
             abort(401, 'Unauthorized');
         }

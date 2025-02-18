@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     }
 
-    public function getProducts(): JsonResponse {
-        return response()->json($this->shopifyRepository->fetchProducts());
+    public function getProducts($shop): JsonResponse {
+        return response()->json($this->shopifyRepository->fetchProducts($shop));
     }
 }

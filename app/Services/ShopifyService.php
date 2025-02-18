@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 use App\Models\Shop;
 
 class ShopifyService
@@ -26,6 +27,7 @@ class ShopifyService
 
     public function getAuthUrl( $shop )
     {
+        Log::info(['asad' => $shop]);
         return "https://{$shop}/admin/oauth/authorize?" . http_build_query([
             'client_id'    => $this->apiKey,
             'scope'        => $this->scope,
@@ -50,13 +52,12 @@ class ShopifyService
             abort(403, 'Access token not received');
         }
 
-        Session::put('shop', $shop);
         // Store or update the shop in the database
         Shop::updateOrCreate(
             ['shopify_domain' => $shop],
             ['access_token' => $data['access_token']]
         );
 
-        return redirect('/shopify/products');
+        return redirect('/shopify/products/'.$shop);
     }
 }

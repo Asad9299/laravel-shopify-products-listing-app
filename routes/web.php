@@ -15,4 +15,4 @@ Route::get('/auth', [ShopifyAuthController::class, 'redirectToShopify']);
 Route::get('/auth/callback', [ShopifyAuthController::class, 'handleCallback']);
 
 # Step 3: Get the list of products
-Route::get('/shopify/products', [ProductController::class, 'getProducts']);
+Route::get('/shopify/products/{shop}', [ProductController::class, 'getProducts']);
